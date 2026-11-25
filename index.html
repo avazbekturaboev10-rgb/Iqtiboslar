@@ -45,18 +45,27 @@ button{font:inherit;color:inherit;cursor:pointer}
 .cols .opt{font-size:14.5px;padding:10px;margin:0 0 10px}
 .big{font:700 72px Caveat,cursive;color:var(--ink);line-height:1}
 .ans{font-size:15px;margin-top:-4px;opacity:.85}
+#st{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;z-index:5;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;padding:0}
+#st:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.bar{padding-right:52px}
 .srch{width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--tx);margin:8px 0 16px}
 .li{font-size:16.5px;padding:12px 14px;margin-bottom:10px}
 .li .ans{margin:6px 0 0;text-align:right;font-weight:600;color:var(--ink);opacity:1}
 @media (prefers-reduced-motion:no-preference){.opt{transition:background .15s,border-color .15s}}
 </style></head><body><main id="app"></main>
+<button id="st" aria-label="Statistika" title="Statistika"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg></button>
 <script>
 const RAW=[["Umar Hayyom", "Taʼlim faqat soʻz va oʻrgatish bilan boʻladi, Tarbiya esa amaliy ish, tajriba bilan boʻladi."], ["Alisher Navoiy", "Odamiy ersang, demagil odami, Onikim, yoʻq xalq gʻamidin gʻami."], ["Arastu (Aristotel)", "Maʼlum bir axloqiy sifatlarga ega boʻlmasdan, munosib inson boʻlmay turib, ijtimoiy hayotda harakat qilib boʻlmaydi."], ["Alisher Navoiy", "Agar qilmadi el himoyat senga, Oʻzingdin kerakdir shikoyat senga."], ["Konfutsiy", "El nazaridan qolsang, Davlating boʻlgay barbod!"], ["Amir Temur", "Davlat ishlarining uchdan ikki ulushi kengash, tadbir va mashvarat, qolgan bir qismi esa qilich bilan bajo keltirilur."], ["Mahmud az-Zamaxshariy", "Biror mamlakat ishlarining orqaga ketishiga sabab — tuzuklari-yu tartibotlarining susayishidandir."], ["Jaloliddin Rumiy", "Butun dunyoni gidirib, goʻzal xulqdan koʻra yaxshiroq layoqatni topmadim."], ["Aflotun", "Yaxshilar masʼuliyat bilan ish qilishlari uchun qonunlarga muhtoj boʻlmaydilar, Yomonlar qonunlarga chap berish uchun yoʻl topadilar."], ["Mahmudxoʻja Behbudiy", "Haq olinur, berilmas."], ["Ulpian", "Huquq — ezgulik va adolatlilik sanʼatidir."], ["Jan Jak Russo", "Xalqning oʻzi toʻgʻridan toʻgʻri tasdiqlamagan qonun — haqiqiy emas."], ["Lev Tolstoy", "Haqgoʻylik hamma joyda, ayniqsa, tarbiya masalasida eng muhim omildir."], ["Gyote", "Jazolashga qodir boʻlmagan hakam oxir-oqibatda jinoyatga sherik boʻladi."], ["Husayn Voiz Koshifiy", "Agar taʼlim-tarbiya va jazo toʻgʻrisida qonun-qoida boʻlmasa, mamlakat ishlari buziladi."], ["Xusrav Dehlaviy", "Kishi farosatda qancha nagʻiron, Aybini oqlashda shuncha bilagʻon."], ["Ahmad Yassaviy", "Tolibman deb yururlar, koʻnglida yoʻq zarra nur, Chin tolibni soʻrasang, ich-u toshi guhar dur."], ["Ali ibn Abu Tolib", "Gʻazab vaqtidagi ozgina sabr minglab afsuslarning oldini oladi."], ["Arastu", "Tarbiya uch narsaga ehtiyoj sezadi: istedodga, ilmga, mashqqa."], ["Abu Rayhon Beruniy", "Har bir insonning qadr-qimmati oʻz ishini qoyil qilib bajarishidadir."], ["Jorj Vashington", "Konstitutsiya men hech qachon tark etmaydigan yoʻriqnomadir."], ["Tomas Jefferson", "Barcha jamoalar uchun umumiy va doimiy konstitutsiya yaratish imkonsiz, har bir avlod oʻz konstitutsiyasini yaratish huquqiga ega."], ["Abu Nasr Forobiy", "Davlatning vazifasi insonlarni baxt-saodatga olib borishdir, bu esa ilm va yaxshi axloq yordamida qoʻlga kiritiladi."], ["Jan Boden", "Suverenitet — davlatning mutlaq va doimiy hokimiyatidir."], ["Arastu", "Xalq demokratiyada koʻpchilikni tashkil etishi sababli, koʻpchilikning qarori hal qiluvchi ahamiyat kasb etadi."], ["Voiz Koshifiy", "Agar tarbiya va jazo haqidagi qonunlar boʻlmasa, davlat faoliyati buziladi va inson huquqlari poymol boʻladi."], ["Indira Gandi", "Odamlar burchlarini unutishga, huquqlarini eslashga moyil boʻladilar."], ["Aflotun", "Xalq qonunlarga ehtiyoj sezib, ularni puxta oʻrgansa, bu faqat uning oʻziga foyda keltiradi. Aks holda qonundan koʻzlangan maqsadga erishib boʻlmaydi."], ["Amir Temur", "Yaxshi odam yurt tuzar, yomon odam yurt buzar."], ["Jan Eliasson", "Inson huquqlari va qonun ustuvorligi hurmat qilinmasa, barqaror tinchlik va rivojlanish boʻlmaydi."], ["Martin Lyuter King", "Kechiktirilgan huquq — rad etilgan huquqdir."], ["Abu Rayhon Beruniy", "Tenglik hukm surgan joyda sotqin, aldamchi iftirolar, gʻam-gʻussa boʻlmaydi."], ["Amir Temur", "Tadbirlarmon mardlik va shijoat sohibi, azmi qatʼiy tadbirkor va hushyor bir kishi minglab tadbirsiz, loqayd kishilardan yaxshidir."], ["Alisher Navoiy", "Ilmni kim vositayi joh etar, Oʻzini-yu xalqni gumroh etar."], ["Gyote", "Agar kimda-kim barcha qonunlarni oʻrganishni xohlasa, uning qonunlarini buzishga vaqti boʻlmaydi."], ["Lev Tolstoy", "Burchingni ado etishga harakat qil, shunda darhol oʻzingning kimligingni bilib olasan."], ["Abu Nasr Forobiy", "Jamiyat davlat bilan kuchlidir, chunki u yetuklashgani sayin oʻz azolarini himoya ostiga oladi."], ["Sharl Lui de Monteskyo", "Siyosiy erkinlik xohlagancha ish tutish degani emas. Agar fuqaro qonunda taqiqlangan ishga qoʻl ursa, erkinlikdan mahrum boʻladi."], ["Shavkat Mirziyoyev", "Tanqidiy tahlil, qatʼiy tartib-intizom va shaxsiy javobgarlik — har bir rahbar faoliyatining kundalik qoidasi boʻlishi kerak."], ["Jan Le Ron Dalamber", "Insonlarning haqiqiy tengligi ularning barchasi bir xilda qonunga boʻysunishida namoyon boʻladi."], ["Mahatma Gandi", "Birovga koʻrsatilgan kichik bir mehribonlik, ming martalik ibodatdan koʻra afzaldir."], ["Frensis Bekon", "Sudyaning ishi qonunni hadya etish emas, balki uni toʻgʻri talqin qilishdir."], ["Nelson Mandela", "Odamlarning inson huquqlarini rad etishi ularning insoniyligiga qarshi chiqishidir."], ["Abu Ali ibn Sino", "Yolgʻizlik halokatga olib keladi. Inson oʻz shaxsiy talablari jihatidan boshqalardan ajralgan holda yashay olmaydi."], ["Lev Tolstoy", "Hayotning yagona mazmuni insoniyatga xizmat qilishdir."], ["Jaloliddin Rumiy", "Haqiqat havoga oʻxshaydi."], ["Alisher Navoiy", "Bu dunyoda abadiy qolmoq mumkin emas, biroq yaxshi nom qoldirmoq katta saodatdir."], ["Kofi Annan", "Inson huquqlari hech qaysi madaniyatga begona emas va barcha xalqlarga tegishlidir. Inson huquqlari umuminsoniy qadriyat hisoblanadi."], ["Shavkat Mirziyoyev", "Xalq davlat idoralariga emas, davlat idoralari xalqqa xizmat qilishi kerak."], ["Teodor Ruzvelt", "Muvaffaqiyatsizlikka uchrash ogʻir, biroq eng yomoni muvaffaqiyatga erishish uchun sira harakat qilmaslikdir."], ["Abu Ali ibn Sino", "Aql tarozisida tortib koʻrilmagan har qanday bilim asossizdir."], ["Tohir Malik", "Agar oilaning baxtini boylik belgilaganda edi, birorta boy xonadonda oilaviy janjal koʻrilmas edi."], ["Jaloliddin Rumiy", "Baxtli oila qurishning ikki sharti bor: yaxshi turmush oʻrtogʻni tanlay bilmoq va yaxshi turmush oʻrtoq boʻlmoq."], ["Mirzo Ulugʻbek", "Oilada ota-onalar oʻz farzandlarining haqiqiy inson boʻlib kamol topishiga alohida eʼtibor berishlari lozim."], ["Pifagor", "Odamlar! Eng avvalo ezgu axloqqa ega boʻlishga harakat qiling, zero, axloq qonunning asosidir."], ["Abdurauf Fitrat", "Agar bir mamlakat aholisi axloqsizlik va johillik bilan oilaviy munosabatlarni zaiflashtirib yuborsa va intizomsizlikka yoʻl qoʻysa, shunda bu millatning saodati va hayoti shubha ostida qoladi."], ["Yuliy Sezar", "Muammolar aqlli insonlarni chora koʻrishga, nodonlarni esa tushkunlikka tushishga undaydi."], ["Mark Avreliy", "Vijdoningga teskari yurma va haqiqatga zid narsani gapirma."], ["Konfutsiy", "Bir inson seni oʻzgartirishi mumkin."], ["Robert Kiyosaki", "Har bir insonga ikkita katta sovgʻa beriladi: miya va vaqt."], ["Jaloliddin Rumiy", "Hayotda muvaffaqiyatga erishish uchun uch narsa kerak: diqqat, intizom va harakat."], ["Uorren Baffet", "Agar keraksiz narsani sotib olsangiz, tez orada kerakli narsani sotasiz."], ["Maykl Dell", "Gʻoyalar arzon mahsulotlardir va ularni roʻyobga chiqarish qimmatroqdir."], ["Amir Temur", "Farzandlar, qarindoshlar, oshna-ogʻayni, goʻshnilar va men bilan bir vaqtlar doʻstlik qilgan barcha odamlarni davlatu neʼmat martabasiga erishganimda unutmadim, haqlarini ado etdim."], ["Shavkat Mirziyoyev", "Hech qachon unutmang, kelajakda sizni yonda ulkan va masʼuliyatli marralar kutmoqda."], ["Konfutsiy", "Agar oʻqisang-u oʻylamasang — chalkashib qolasan."], ["Mahatma Gandi", "Agar biz butun dunyoda tinchlik oʻrnatishni istasak, ishni bolalar tarbiyasidan boshlashimiz zarur."], ["Uinston Cherchill", "Buyuklik yoʻlida mashaqqatlarni yengishda donolikdan foydalaning. Jamiki buyuk narsalar oddiy."], ["Martin Lyuter King", "Qushlar kabi uchishni, baliq kabi suzishni oʻrgandik. Lekin hozirgacha yer yuzida aka-ukadek yashashni oʻrganmadik."], ["Shavkat Mirziyoyev", "Biz qatʼiy ishonamiz, BMT bundan keyin ham xalqaro munosabatlarda hal qiluvchi oʻrin tutadi."], ["Leonardo da Vinchi", "Agar temir ishlatilmasa, zanglaydi. Agar suv harakatlanib turmasa, aynidi. Agar kishi fikrlamasa, aqlda ham shunday holat yuz beradi."], ["Shavkat Mirziyoyev", "Insonlarning dard-u tashvishlarini oʻylab yashash odamiylikning eng oliy mezonidir."], ["Artur Konan Doyl", "Ish meni charchatgan vaqtni eslolmayman, lekin bekorchilik meni charchatadi."], ["Najmiddin Kubro", "Vaqtni «essiz», «qaniydi», «koshkiydi»lar bilan oʻtkazgan kishining umri eng qisqa umr ekan."]];
 const FIX={"Arastu (Aristotel)":"Arastu","Voiz Koshifiy":"Husayn Voiz Koshifiy"};
-const Q=RAW.map(([a,t])=>({a:FIX[a]||a,t}));
+const Q=RAW.map(([a,t],id)=>({id,a:FIX[a]||a,t}));
 const AUTH=[...new Set(Q.map(x=>x.a))];
 const MULTI=AUTH.filter(a=>Q.filter(x=>x.a===a).length>1);
 const app=document.getElementById("app");
+let ST={};try{ST=JSON.parse(localStorage.getItem("iq_stats")||"{}")}catch(e){}
+const rec=(c,ok)=>{const s=ST[c.id]||[0,0];s[0]++;s[1]=ok?Math.max(0,s[1]-.5):s[1]+1;s[2]=(s[2]||0)+(ok?0:1);ST[c.id]=s;try{localStorage.setItem("iq_stats",JSON.stringify(ST))}catch(e){}};
+const wk=c=>(ST[c.id]||[0,0])[1];
+const weak=()=>Q.filter(c=>wk(c)>0).sort((a,b)=>wk(b)-wk(a));
+const pickW=(arr,n,f)=>{const pool=arr.slice(),out=[];while(out.length<n&&pool.length){const ws=pool.map(x=>1+3*Math.min(f(x),5));let r=Math.random()*ws.reduce((a,b)=>a+b,0),k=0;while(k<pool.length-1&&r>ws[k]){r-=ws[k];k++}out.push(pool.splice(k,1)[0])}return out};
 const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const pick=(a,n)=>sh(a).slice(0,n);
 const el=(h)=>{const d=document.createElement("div");d.innerHTML=h;return d.firstElementChild};
@@ -70,8 +79,9 @@ function home(){
  <button class="mode" data-m="1"><i>${best.m1!=null?"Rekord: "+best.m1+"/10":""}</i><b>Bu kimning soʻzlari?</b><span>Iqtibos koʻrsatiladi, muallifni toping.</span></button>
  <button class="mode" data-m="2"><i>${best.m2!=null?"Rekord: "+best.m2+" xato":""}</i><b>Moslashtirish</b><span>5 ta iqtibosni 5 ta muallif bilan juftlang.</span></button>
  <button class="mode" data-m="3"><i>${best.m3!=null?"Rekord: "+best.m3+"/8":""}</i><b>Shu kishining soʻzlarini toping</b><span>Muallif beriladi, uning iqtiboslarini belgilang.</span></button>
+ <button class="mode" data-m="5"><i>${weak().length?weak().length+" ta":""}</i><b>Zaif tomonlarim</b><span>Koʻp xato qilgan iqtiboslaringiz takrorlanadi.</span></button>
  <button class="mode" data-m="4"><b>Iqtiboslar roʻyxati</b><span>Barcha iqtiboslarni oʻqing va qidiring.</span></button>`;
- app.querySelectorAll(".mode").forEach(b=>b.onclick=()=>[0,m1,m2,m3,m4][+b.dataset.m]());
+ app.querySelectorAll(".mode").forEach(b=>b.onclick=()=>[0,m1,m2,m3,m4,m5][+b.dataset.m]());
 }
 function end(key,txt,sub,low){
  save(key,low?-1:0);
@@ -90,7 +100,7 @@ function fin(key,score,total,unit){
 const verdict=(s,t)=>s/t>=.9?"Ajoyib, siz iqtiboslarni yaxshi bilasiz!":s/t>=.6?"Yaxshi natija. Yana bir marta urinib koʻring.":"Yana mashq qiling, har safar yaxshiroq boʻladi.";
 
 function m1(){
- const items=pick(Q,10);let i=0,score=0;
+ const items=pickW(Q,10,wk);let i=0,score=0;
  const pos=sh([0,1,2,3,0,1,2,3,0,1]);
  const show=()=>{
   const c=items[i];const w=pick(AUTH.filter(a=>a!==c.a),3);const opts=[];
@@ -99,6 +109,7 @@ function m1(){
   document.getElementById("home").onclick=home;
   const o=document.getElementById("o");
   opts.forEach(a=>{const b=el(`<button class="opt">${esc(a)}</button>`);b.onclick=()=>{
+   rec(c,a===c.a);
    o.querySelectorAll("button").forEach(x=>{x.disabled=true;if(x.textContent===c.a)x.classList.add("ok")});
    if(a===c.a){score++;document.getElementById("msg").textContent="Toʻgʻri!"}else{b.classList.add("bad");document.getElementById("msg").textContent="Toʻgʻri javob: "+c.a}
    const n=document.getElementById("next");n.hidden=false;n.focus();n.onclick=()=>{i++;i<10?show():fin("m1",score,10,verdict(score,10))}};o.appendChild(b)});
@@ -117,9 +128,9 @@ function m2(){
   const check=()=>{
    if(!selL||!selR)return;
    const l=selL,r=selR;selL=selR=null;
-   if(l.c===r.c){[l,r].forEach(b=>{b.className="opt ok";b.disabled=true});done++;
+   if(l.c===r.c){rec(l.c,true);[l,r].forEach(b=>{b.className="opt ok";b.disabled=true});done++;
     if(done===5){setTimeout(()=>{round++;round<3?play():fin("m2",mistakes,0,mistakes===0?"Birorta ham xato qilmadingiz!":"Xatolar soni qancha kam boʻlsa, shuncha yaxshi.")},500)}}
-   else{mistakes++;[l,r].forEach(b=>b.className="opt bad");document.getElementById("msg").textContent="Mos emas, yana urinib koʻring.";
+   else{mistakes++;rec(l.c,false);[l,r].forEach(b=>b.className="opt bad");document.getElementById("msg").textContent="Mos emas, yana urinib koʻring.";
     setTimeout(()=>{[l,r].forEach(b=>b.className="opt");document.getElementById("msg").textContent="";document.querySelector(".bar span").textContent=`Tur ${round+1} / 3 · Xato: ${mistakes}`},700)}
   };
   const bind=(arr,side)=>arr.forEach(b=>{b.onclick=()=>{
@@ -129,7 +140,7 @@ function m2(){
  };play();
 }
 function m3(){
- const items=pick(MULTI,8);let i=0,score=0;
+ const items=pickW(MULTI,8,a=>Q.filter(x=>x.a===a).reduce((t,x)=>t+wk(x),0));let i=0,score=0;
  const show=()=>{
   const a=items[i];const mine=Q.filter(x=>x.a===a).slice(0,3);
   const cards=sh([...mine,...pick(Q.filter(x=>x.a!==a),6-mine.length)]);
@@ -141,7 +152,7 @@ function m3(){
   document.getElementById("chk").onclick=function(){
    let ok=true;
    o.querySelectorAll("button").forEach(b=>{b.disabled=true;const m=b.c.a===a,s=sel.has(b.c);b.classList.remove("sel");
-    if(m&&s)b.classList.add("ok");else if(m){b.classList.add("miss");ok=false}else if(s){b.classList.add("bad");ok=false}});
+    if(m&&s){b.classList.add("ok");rec(b.c,true)}else if(m){b.classList.add("miss");ok=false;rec(b.c,false)}else if(s){b.classList.add("bad");ok=false;rec(b.c,false)}});
    if(ok)score++;
    document.getElementById("msg").textContent=ok?"Toʻgʻri!":"Yashil chiziq — oʻtkazib yuborilgan, qizil — xato tanlangan.";
    this.hidden=true;const n=document.getElementById("next");n.hidden=false;n.focus();
@@ -157,6 +168,62 @@ function m4(){
   l.innerHTML=r.length?r.map(([n,x])=>`<div class="q li">${n}. ${esc(x.t)}<div class="ans">— ${esc(x.a)}</div></div>`).join(""):`<p class="sub">Hech narsa topilmadi.</p>`};
  document.getElementById("s").oninput=e=>draw(e.target.value);draw("");
 }
+function m5(){
+ const w=weak();
+ if(!w.length){
+  app.innerHTML=bar("","")+`<h2>Zaif tomonlarim</h2><p class="sub">Hozircha xatolaringiz yoʻq. Boshqa testlarni yeching: xato qilgan iqtiboslaringiz shu yerda toʻplanadi va takrorlanadi.</p><button class="go" id="h2">Bosh sahifa</button>`;
+  document.getElementById("home").onclick=home;document.getElementById("h2").onclick=home;return;
+ }
+ const wa={};w.forEach(c=>wa[c.a]=(wa[c.a]||0)+wk(c));
+ const ta=Object.entries(wa).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+ app.innerHTML=bar("",w.length+" ta iqtibos")+`<h2>Zaif tomonlarim</h2><p class="sub">Eng koʻp adashadigan mualliflar: <b>${ta.map(esc).join(", ")}</b></p>`+w.slice(0,5).map(c=>`<div class="q li">${esc(c.t)}<div class="ans">— ${esc(c.a)} · xato: ${Math.ceil(wk(c))}</div></div>`).join("")+`<button class="go" id="go">Mashq qilish</button>`;
+ document.getElementById("home").onclick=home;
+ document.getElementById("go").onclick=()=>{
+  const queue=sh(w.slice(0,10)),tries=new Map();let i=0,score=0,asked=0;
+  const show=()=>{
+   const c=queue[i],k=Math.random()*4|0,wr=pick(AUTH.filter(a=>a!==c.a),3),opts=[];
+   for(let n=0,j=0;n<4;n++)opts.push(n===k?c.a:wr[j++]);
+   app.innerHTML=bar("",`${i+1} / ${queue.length} · Toʻgʻri: ${score}`)+`<h2>Bu kimning soʻzlari?</h2><div class="q">${esc(c.t)}</div><div id="o"></div><div class="msg" id="msg"></div><button class="go" id="next" hidden>Keyingisi</button>`;
+   document.getElementById("home").onclick=home;
+   const o=document.getElementById("o");
+   opts.forEach(a=>{const b=el(`<button class="opt">${esc(a)}</button>`);b.onclick=()=>{
+    const ok=a===c.a;asked++;rec(c,ok);
+    o.querySelectorAll("button").forEach(x=>{x.disabled=true;if(x.textContent===c.a)x.classList.add("ok")});
+    if(ok){score++;document.getElementById("msg").textContent="Toʻgʻri!"}
+    else{b.classList.add("bad");document.getElementById("msg").textContent="Toʻgʻri javob: "+c.a+". Bu iqtibos yana takrorlanadi.";
+     const t=tries.get(c)||0;if(t<2){tries.set(c,t+1);queue.splice(Math.min(i+3,queue.length),0,c)}}
+    const n=document.getElementById("next");n.hidden=false;n.focus();
+    n.onclick=()=>{i++;i<queue.length?show():done()}};o.appendChild(b)});
+  };
+  const done=()=>{app.innerHTML=`<h1>Mashq tugadi</h1><div class="big">${score}/${asked}</div><p class="sub">Toʻgʻri javob bergan iqtiboslaringiz zaif roʻyxatdan asta-sekin chiqib ketadi.</p><button class="go" id="again">Yana mashq</button> <button class="go" id="h3" style="background:none;color:var(--ink);border:2px solid var(--ink)">Bosh sahifa</button>`;
+   document.getElementById("again").onclick=m5;document.getElementById("h3").onclick=home};
+  show();
+ };
+}
+function m6(){
+ const tot=c=>(ST[c.id]||[])[2]||0;
+ const seen=Object.values(ST).reduce((t,x)=>t+x[0],0),bad=Object.values(ST).reduce((t,x)=>t+(x[2]||0),0);
+ const hb=()=>document.getElementById("home").onclick=home;
+ if(!bad){
+  app.innerHTML=bar("","")+`<h2>Statistika</h2><p class="sub">Hozircha xatolar yoʻq${seen?"":", testlar hali yechilmagan"}. Test yeching, eng koʻp xato qilingan iqtiboslar shu yerda chiqadi.</p>`;
+  hb();return;
+ }
+ const q=Q.filter(c=>tot(c)>0).sort((a,b)=>tot(b)-tot(a)).slice(0,10);
+ const wa={};Q.forEach(c=>{if(tot(c))wa[c.a]=(wa[c.a]||0)+tot(c)});
+ const au=Object.entries(wa).sort((a,b)=>b[1]-a[1]).slice(0,5);
+ const pct=Math.round((seen-bad)/seen*100);
+ app.innerHTML=bar("","")+`<h2>Statistika</h2><p class="sub">Jami javoblar: <b>${seen}</b> · Xatolar: <b>${bad}</b> · Aniqlik: <b>${pct}%</b></p>
+ <h2 style="font-size:24px;margin-bottom:10px">Eng koʻp xato qilingan iqtiboslar</h2>`+
+ q.map((c,i)=>`<div class="q li">${i+1}. ${esc(c.t)}<div class="ans">— ${esc(c.a)} · ${tot(c)} marta xato</div></div>`).join("")+
+ `<h2 style="font-size:24px;margin:18px 0 10px">Eng koʻp adashiladigan mualliflar</h2>`+
+ au.map(([a,n])=>`<div class="opt" style="cursor:default">${esc(a)} <b style="float:right">${n}</b></div>`).join("")+
+ `<button class="go" id="pr">Zaif tomonlarim mashqi</button> <button class="go" id="rs" style="background:none;color:var(--bad);border:2px solid var(--bad)">Statistikani tozalash</button>`;
+ hb();
+ document.getElementById("pr").onclick=m5;
+ const rs=document.getElementById("rs");
+ rs.onclick=()=>{if(rs.dataset.s){ST={};try{localStorage.removeItem("iq_stats")}catch(e){}m6()}else{rs.dataset.s=1;rs.textContent="Rostdan tozalaysizmi? Yana bosing"}};
+}
+document.getElementById("st").onclick=m6;
 home();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script></body></html>
